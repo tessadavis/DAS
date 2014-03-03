@@ -1,14 +1,22 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Das</title>
+  <title>Das Contacts</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container'">
+		<a href="#" class="navbar-brand">Kogarah DAS</a>
+		<ul class="nav navbar-nav">
+			<li><%= link_to "All contacts", contacts_path %></li>
+	</div>
+</nav>
+<div class="container">
+	<%= yield %>
+</div>
 
 </body>
 </html>
