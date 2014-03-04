@@ -35,5 +35,9 @@
   <%= @contact.info %>
 </p>
 
+<p>
+This contact was added by <%= @contact.user.first_name %>
+</p>
+
 <%= link_to 'Edit', edit_contact_path(@contact) %> |
 <%= link_to 'Back', contacts_path %>
