@@ -36,6 +36,16 @@ class ContactsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to contact_path(assigns(:contact))
+    assert_equal assigns(:contact).user_id, users(:tessa).id
+  end
+
+  test "should create contact for the current user when logged in" do
+    sign_in users(:tessa)
+    assert_difference('Contact.count') do
+      post :create, contact: { area: @contact.area, category: @contact.category, email: @contact.email, info: @contact.info, name: @contact.name, phone: @contact.phone, website: @contact.website, user_id: users(:fergal).id }
+    end
+
+    assert_redirected_to contact_path(assigns(:contact))
   end
 
   test "should show contact" do
@@ -53,6 +63,20 @@ class ContactsControllerTest < ActionController::TestCase
     sign_in users(:tessa)
     patch :update, id: @contact, contact: { area: @contact.area, category: @contact.category, email: @contact.email, info: @contact.info, name: @contact.name, phone: @contact.phone, website: @contact.website }
     assert_redirected_to contact_path(assigns(:contact))
+  end
+
+  test "should update contact for the current user when logged in" do
+    sign_in users(:tessa)
+    patch :update, id: @contact, contact: { area: @contact.area, category: @contact.category, email: @contact.email, info: @contact.info, name: @contact.name, phone: @contact.phone, website: @contact.website, user_id: users(:fergal).id }
+    assert_redirected_to contact_path(assigns(:contact))
+    assert_equal assigns(:contact).user_id, users(:tessa).id
+  end
+
+  test "should not update contact if nothing has changed" do
+    sign_in users(:tessa)
+    patch :update, id: @contact
+    assert_redirected_to contact_path(assigns(:contact))
+    assert_equal assigns(:contact).user_id, users(:tessa).id
   end
 
   test "should destroy contact" do

@@ -26,8 +26,7 @@ class ContactsController < ApplicationController
   # POST /contacts
   # POST /contacts.json
   def create
-    @contact = Contact.new(contact_params)
-    @contact.user_id = User.user_id
+    @contact = current_user.contacts.new(contact_params)
 
     respond_to do |format|
       if @contact.save
@@ -43,8 +42,16 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1
   # PATCH/PUT /contacts/1.json
   def update
+    def contact_params
+      params.require(:contact).permit(:name, :email, :category, :organisation, :email, :phone, :user_id) if params[:contact]
+    end
+    
+    @contact = current_user.contacts.find(params[:id])
+    if params[:contact] && params[:contact].has_key?(:user_id)
+      params[:contact].delete(:user_id) 
+    end
     respond_to do |format|
-      if @contact.update(contact_params)
+      if @contact.update((contact_params))
         format.html { redirect_to @contact, notice: 'Contact was successfully updated.' }
         format.json { head :no_content }
       else
@@ -52,7 +59,10 @@ class ContactsController < ApplicationController
         format.json { render json: @contact.errors, status: :unprocessable_entity }
       end
     end
+
   end
+
+  
 
   # DELETE /contacts/1
   # DELETE /contacts/1.json
