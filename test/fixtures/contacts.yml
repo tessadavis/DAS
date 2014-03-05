@@ -8,6 +8,7 @@ one:
   website: MyString
   email: MyString
   info: MyText
+  user: tessa
 
 two:
   name: MyString
@@ -17,3 +18,4 @@ two:
   website: MyString
   email: MyString
   info: MyText
+  user: tessa
