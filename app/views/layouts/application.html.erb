@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Das Contacts</title>
+  <title>DAS Contacts</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -17,11 +17,11 @@
 		
 		<ul class="nav navbar-nav navbar-right">
 			<% if user_signed_in? %>
-				<li> <%= link_to current_user.full_name, edit_user_registration_path %></li>
-				<li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>
+				<li> <%= link_to current_user.full_name, edit_path %></li>
+				<li><%= link_to "Log out", logout_path %></li>
 			<% else %>
-				<li><%= link_to "Register", new_user_registration_path %></li>
-				<li><%= link_to "Sign in", new_user_session_path %></li>
+				<li><%= link_to "Register", register_path %></li>
+				<li><%= link_to "Log in", login_path %></li>
 			<% end %>
 
 
