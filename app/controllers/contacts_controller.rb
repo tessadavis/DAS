@@ -16,6 +16,7 @@ class ContactsController < ApplicationController
   # GET /contacts/new
   def new
     @contact = Contact.new
+
   end
 
   # GET /contacts/1/edit
@@ -26,6 +27,7 @@ class ContactsController < ApplicationController
   # POST /contacts.json
   def create
     @contact = Contact.new(contact_params)
+    @contact.user_id = User.user_id
 
     respond_to do |format|
       if @contact.save
