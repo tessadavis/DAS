@@ -8,9 +8,10 @@ class User < ActiveRecord::Base
   validates :profile_name, presence: true,
   							uniqueness: true,
   							format: {
-  								with: /\A[a-zA-Z\-\_]+\Z/,
+  								with: /\A[a-zA-Z0-9_-]+$\Z/,
   								message: 'must be formatted correctly'
   							}
+  validates :email, presence: true
 
 
   has_many :contacts
