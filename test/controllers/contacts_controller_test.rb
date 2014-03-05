@@ -23,7 +23,14 @@ class ContactsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should create contact" do
+  test "should be logged in to create a contact" do
+    post :create, contact: {name: "Mandy"}
+    assert_response :redirect
+    assert_redirected_to new_user_session_path
+  end
+
+  test "should create contact when logged in" do
+    sign_in users(:tessa)
     assert_difference('Contact.count') do
       post :create, contact: { area: @contact.area, category: @contact.category, email: @contact.email, info: @contact.info, name: @contact.name, phone: @contact.phone, website: @contact.website }
     end
@@ -36,12 +43,14 @@ class ContactsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
+  test "should get edit when logged in" do
+    sign_in users(:tessa)
     get :edit, id: @contact
     assert_response :success
   end
 
-  test "should update contact" do
+  test "should update contact when logged in" do
+    sign_in users(:tessa)
     patch :update, id: @contact, contact: { area: @contact.area, category: @contact.category, email: @contact.email, info: @contact.info, name: @contact.name, phone: @contact.phone, website: @contact.website }
     assert_redirected_to contact_path(assigns(:contact))
   end
