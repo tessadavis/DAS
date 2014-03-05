@@ -4,3 +4,11 @@ tessa:
   email: "tessardavis@me.com"
   profile_name: "tessardavis"
   encrypted_password: "password"
+
+
+fergal:
+  first_name: "Fergal"
+  last_name: "Davis"
+  email: "fergalfdavis@me.com"
+  profile_name: "fergalfdavis"
+  encrypted_password: "password"
