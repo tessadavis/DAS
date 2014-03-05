@@ -8,10 +8,13 @@
       <fieldset>
             <legend>Edit user</legend>
             <div class="form-group">
+              <%= f.input :first_name %>
+              <%= f.input :last_name %>
+              <%= f.input :profile_name %>
+              <%= f.input :organisation %>
               <%= f.input :email %>
               <%= f.input :password %>
               <%= f.input :password_confirmation %>
-              <%= f.input :current_password %>
               <%= f.button :submit, "Update", class: "btn btn-success" %>
             </div>
           </fieldset> 
