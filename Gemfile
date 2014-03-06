@@ -8,8 +8,13 @@ gem 'rails', '4.0.2'
 gem 'devise'
 gem 'simple_form'
 
+group :development do
+	gem 'thin'
+end
+
 group :development, :test do
 	gem 'sqlite3'
+	gem 'log_buddy'
 end
 
 group :production do
@@ -37,6 +42,7 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+gem 'paperclip'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -5,7 +5,8 @@ class ContactsController < ApplicationController
   # GET /contacts
   # GET /contacts.json
   def index
-    @contacts = Contact.all
+    @contacts = Contact.find(:all, :order => 'name')
+    
   end
 
   # GET /contacts/1
@@ -13,9 +14,26 @@ class ContactsController < ApplicationController
   def show
   end
 
+  def listarea
+    @listarea = Contact.order(:area).uniq.pluck(:area)
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @contacts }
+    end
+  end
+
+  def areacontact
+    @contacts =  Contact.order(:name).find_all_by_area(params[:area])
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @contacts }
+    end 
+  end
+
   # GET /contacts/new
   def new
-    @contact = Contact.new
+    @contact = current_user.contacts.new
+    @contact.build_document
 
   end
 
@@ -43,7 +61,7 @@ class ContactsController < ApplicationController
   # PATCH/PUT /contacts/1.json
   def update
     def contact_params
-      params.require(:contact).permit(:name, :email, :category, :organisation, :email, :phone, :user_id) if params[:contact]
+      params.require(:contact).permit(:name, :email, :category, :area, :organisation, :website, :phone, :user_id, :document_attributes) if params[:contact]
     end
     
     @contact = current_user.contacts.find(params[:id])
@@ -82,6 +100,6 @@ class ContactsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contact_params
-      params.require(:contact).permit(:name, :category, :area, :phone, :website, :email, :info, :user_id)
+      params.require(:contact).permit(:name, :category, :area, :phone, :website, :email, :info, :user_id, :document_attributes)
     end
 end

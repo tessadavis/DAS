@@ -50,6 +50,7 @@ class UserTest < ActiveSupport::TestCase
 		user.password= user.password_confirmation = "asdfasf"
 		user.profile_name = "tessdas"
 		assert user.valid?
+		puts user.errors.inspect
 	end
 
 

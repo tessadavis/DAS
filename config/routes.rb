@@ -1,5 +1,7 @@
 Das::Application.routes.draw do
   get "profiles/show"
+  get "contacts/listarea"
+  get "contacts/areacontact"
   devise_for :users
 
   devise_scope :user do
@@ -11,9 +13,13 @@ Das::Application.routes.draw do
   
   resources :contacts
   get 'feed', to: 'contacts#index', as: :feed
+  get 'listarea', to: "contacts#listarea", as: :listarea
+  get 'areacontact', to: "contacts#areacontact", as: :areacontact
   root :to => "contacts#index"
 
   get ':id', to: 'profiles#show'
+
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

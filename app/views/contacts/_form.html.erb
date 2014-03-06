@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-4">
 
-      <%= simple_form_for(@contact, html: {class: "form-inline well"}, role: "form") do |f| %>
+      <%= simple_form_for(@contact, html: {class: "form-inline well", multipart: true}, role: "form") do |f| %>
         <% if @contact.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@contact.errors.count, "error") %> prohibited this contact from being saved:</h2>
@@ -22,6 +22,11 @@
           <%= f.input :phone %>
           <%= f.input :website %>
           <%= f.input :email %>
+
+          <%= f.fields_for :document do |document_fields| %>
+            <%= document_fields.input :attachment, as: :file %>
+          <% end %>
+
           <%= f.button :submit, class: "btn-success" %>
         </div>
   </div>

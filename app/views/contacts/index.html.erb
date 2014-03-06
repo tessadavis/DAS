@@ -5,27 +5,34 @@
 <%= link_to "Add a new contact", new_contact_path, class: "btn btn-success" %>
 
 <% @contacts.each do |contact| %>
+  <div class="contactrow">
+    <div class="row">
+      <div class="contact col-md-10">  
+        <strong>Name: <%= link_to contact.name + " (click to show contact)", contact, :target => '_blank'%> </strong>
+        <% if contact.category %>
+          <p>Category: <%= contact.category %>
+        <% end %>
+        <% if contact.area %>
+          <p>Area: <%= contact.area %></p>
+        <% end %>
 
-  <div class="contact">
-    <strong>Name: <%= contact.name %></strong>
-    <p>Phone number: <%= contact.phone %></p>
-    <p>Category: <%= contact.category %></p>
-    <p>Area: <%= contact.area %></p>
-    <p>Website: <%= contact.website %></p>
-    <p>Email: <%= contact.email %></p>
-    <p>Info: <%= contact.info %></p>
+        <% if contact.user == current_user %>
+          <div class="meta">
+            <span class="admin">
+                <%= link_to "Edit", edit_contact_path(contact) %>  |
+              
+                <%= link_to "Delete", contact, method: :delete, data: { confirm: "Are you sure you want to delete this contact?"} %>
+             </span>
+          </div>
+        <% end %>
+      </div>
 
-    <div class="meta">
-      <%= link_to "Show", contact %> |
-      <span class="admin">
-        <%= link_to "Edit", edit_contact_path(contact) %> |
-        <%= link_to "Delete", contact, method: :delete, data: { confirm: "Are you sure you want to delete this contact?"} %>
-      </span>  
+      
     </div>
   </div>
-
-
 <% end %>
+
+
 
 
 
