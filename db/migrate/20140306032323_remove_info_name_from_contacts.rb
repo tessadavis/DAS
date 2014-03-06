@@ -1,5 +1,5 @@
 class RemoveInfoNameFromContacts < ActiveRecord::Migration
   def change
-    remove_column :contacts, :field_name, :info
+    remove_column :contacts, :info
   end
 end
